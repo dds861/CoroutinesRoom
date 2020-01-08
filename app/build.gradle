@@ -23,6 +23,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    android {
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+    }
 }
 
 dependencies {
@@ -55,5 +61,10 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.3"
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //kodein
+    implementation "org.kodein.di:kodein-di-core-jvm:6.5.0"
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.5.0"
+    implementation "org.kodein.di:kodein-di-framework-android-support:6.0.0"
 
 }

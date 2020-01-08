@@ -7,28 +7,43 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dd.coroutineroomdatabase.R
 import com.dd.coroutineroomdatabase.database.User
-import com.dd.coroutineroomdatabase.database.UserDatabase
-import com.dd.coroutineroomdatabase.database.UserRepository
+import com.dd.coroutineroomdatabase.inject.injectionActivityModule
 import kotlinx.android.synthetic.main.activity_main.*
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
+
+    private val parentKodein by closestKodein()
+
+    override val kodein: Kodein by Kodein.lazy {
+        extend(parentKodein)
+        import(injectionActivityModule())
+    }
+
+    private val userViewModelFactory:UserViewModelFactory by instance()
+
     private lateinit var userViewModel: UserViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initViewModel()
         showUsersList()
         init()
     }
 
     private fun initViewModel() {
-        val dao = UserDatabase.getInstance(application).userDAO
-        val repository = UserRepository(dao)
-        val viewModelFactory =
-            UserViewModelFactory(repository)
-        userViewModel = ViewModelProvider(this, viewModelFactory).get(UserViewModel::class.java)
+//        val userDatabase = UserDatabase.getInstance(application)
+//        val dao = userDatabase.userDAO
+//        val repository = UserRepository(dao)
+//        val viewModelFactory = UserViewModelFactory(repository)
+
+        userViewModel = ViewModelProvider(this, userViewModelFactory).get(UserViewModel::class.java)
     }
 
     private fun init() {
