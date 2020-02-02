@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.dd.coroutineroomdatabase.user.MainFragment"
+        android:name="com.dd.coroutineroomdatabase.presentation.main.MainFragment"
         android:label="MainFragment" />
 </navigation>

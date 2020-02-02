@@ -3,14 +3,14 @@
     package="com.dd.coroutineroomdatabase">
 
     <application
-        android:name=".UserApplication"
+        android:name=".framework.di.UserApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.dd.coroutineroomdatabase.user.MainActivity">
+        <activity android:name="com.dd.coroutineroomdatabase.presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
